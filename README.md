@@ -53,7 +53,6 @@ npm install
 
 npm start
 
-
 The frontend should now be accessible at http://localhost:3000 (or another specified port).
 
 ## Contributing
@@ -68,4 +67,3 @@ We welcome contributions to Reunify! Please follow these steps to contribute:
 Please make sure your changes adhere to the existing code style and that all tests pass before submitting a pull request. Also, include a description of your changes and any issues they address.
 
 Thank you for your interest in contributing to Reunify!
-
