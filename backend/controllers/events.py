@@ -3,8 +3,6 @@ from flask_mysqldb import MySQL
 
 events_bp = Blueprint('events', __name__)
 
-
-
 # CREATE operation
 @events_bp.route('/events', methods=['POST'])
 def create_event():
