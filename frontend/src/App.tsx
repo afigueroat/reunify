@@ -10,7 +10,6 @@ const App: React.FC = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginPage />} />
         {/* Add more Route components as needed */}
       </Routes>
     </Router>
