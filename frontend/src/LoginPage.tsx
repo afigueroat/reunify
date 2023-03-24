@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import RegisterPage from './RegisterPage'
 import { Modal, Button } from 'react-bootstrap'
+import axios from 'axios'
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('')
@@ -13,8 +14,16 @@ const LoginPage: React.FC = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
-
-    // Add your login logic here
+    try {
+      const response = await axios.post('/api/login', { email, password })
+      // Save the access token to local storage or cookies
+      localStorage.setItem('access_token', response.data.access_token)
+      // Redirect the user to the dashboard or home page
+      window.location.href = '/events'
+    } catch (err) {
+      const error = err instanceof Error ? err.message : 'An unknown error occurred'
+      setErrorMessage(error)
+    }
   }
 
   return (

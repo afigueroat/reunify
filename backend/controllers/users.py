@@ -6,7 +6,6 @@ users_bp = Blueprint('users', __name__)
 # CREATE operation
 @users_bp.route('/users', methods=['POST'])
 def create_user():
-    print("Received data:", request.json)
     username = request.json['username']
     password = request.json['password']
     email = request.json['email']
@@ -69,3 +68,26 @@ def delete_user(user_id):
     cur.close()
 
     return jsonify({'message': 'User deleted successfully'}), 200
+
+@users_bp.route("/login", methods=["POST"])
+def login():
+    email = request.json.get("email")
+    password = request.json.get("password")
+    print(request.json)
+    cur = current_app.mysql.connection.cursor()
+    cur.execute("SELECT email, password, user_id FROM users where email = %s", (email,))
+    user = cur.fetchone()
+    print(user)
+    cur.close()
+
+    if not user:
+        return jsonify({"error": "Invalid email or password"}), 401
+
+    if user[1] != password:
+        return jsonify({"error": "Invalid email or password"}), 401
+
+    # Generate and return the access token
+    # You can use any authentication library of your choice to generate the token
+    access_token = '123456789'
+
+    return jsonify({"access_token": access_token}), 200
