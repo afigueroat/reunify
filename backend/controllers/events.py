@@ -1,3 +1,4 @@
+import datetime
 from flask import Flask, jsonify, request, Blueprint, current_app
 from flask_mysqldb import MySQL
 
@@ -26,7 +27,22 @@ def get_all_events():
     cur.execute("SELECT * FROM events")
     data = cur.fetchall()
     cur.close()
-    return jsonify(data), 200
+    events = []
+    for row in data:
+        event = {
+            'event_id': row[0],
+            'event_name': row[1],
+            'event_type_id': row[2],
+            'event_date': row[3].strftime('%Y-%m-%d'),
+            'event_time': (datetime.datetime(1, 1, 1) + row[4]).time().strftime('%H:%M:%S'),
+            'event_location': row[5],
+            'event_description': row[6],
+            'user_id': row[7]
+        }
+        events.append(event)
+    print(events)
+    return jsonify(events), 200
+
 
 @events_bp.route('/events/<int:event_id>', methods=['GET'])
 def get_event(event_id):
