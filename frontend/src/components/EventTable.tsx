@@ -1,30 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import Table from 'react-bootstrap/Table';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react'
+import Table from 'react-bootstrap/Table'
+import axios from 'axios'
 
 interface EventData {
-    event_id: number;
-    event_name: string;
-    event_type_id: number;
-    event_date: string;
-    event_time: string;
-    event_location: string;
-    event_description: string | null;
-    user_id: number;
-  }
-  
+  event_id: number
+  event_name: string
+  event_type_id: number
+  event_date: string
+  event_time: string
+  event_location: string
+  event_description: string | null
+  user_name: string
+}
+
 function EventTable() {
-    const [events, setEvents] = useState<EventData[]>([]);
+  const [events, setEvents] = useState<EventData[]>([])
 
   useEffect(() => {
-    axios.get('/api/events')
-      .then(response => {
-        setEvents(response.data);
+    axios
+      .get('/api/events')
+      .then((response) => {
+        setEvents(response.data)
       })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
 
   const fields = [
     { key: 'event_name', label: 'Nombre del evento' },
@@ -33,21 +34,21 @@ function EventTable() {
     { key: 'event_time', label: 'Hora del evento' },
     { key: 'event_location', label: 'Ubicación del evento' },
     { key: 'event_description', label: 'Descripción del evento' },
-    { key: 'user_id', label: 'ID del usuario' }
-  ];
+    { key: 'user_name', label: 'ID del usuario' },
+  ]
 
   return (
     <div>
       <Table striped bordered hover>
         <thead>
           <tr>
-            {fields.map(field => (
+            {fields.map((field) => (
               <th key={field.key}>{field.label}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {events.map(event => (
+          {events.map((event) => (
             <tr key={event.event_id}>
               <td>{event.event_name}</td>
               <td>{event.event_type_id}</td>
@@ -55,13 +56,13 @@ function EventTable() {
               <td>{event.event_time}</td>
               <td>{event.event_location}</td>
               <td>{event.event_description}</td>
-              <td>{event.user_id}</td>
+              <td>{event.user_name}</td>
             </tr>
           ))}
         </tbody>
       </Table>
     </div>
-  );
+  )
 }
 
-export default EventTable;
+export default EventTable

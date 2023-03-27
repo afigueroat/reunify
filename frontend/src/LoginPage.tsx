@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import RegisterPage from './RegisterPage'
-import { Modal, Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import axios from 'axios'
+import CustomModal from './components/Modal'
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('')
@@ -21,7 +22,8 @@ const LoginPage: React.FC = () => {
       // Redirect the user to the dashboard or home page
       window.location.href = '/events'
     } catch (err) {
-      const error = err instanceof Error ? err.message : 'An unknown error occurred'
+      const error =
+        err instanceof Error ? err.message : 'An unknown error occurred'
       setErrorMessage(error)
     }
   }
@@ -94,19 +96,9 @@ const LoginPage: React.FC = () => {
               Register
             </a>
           </p>
-          <Modal show={showRegister} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Register</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <RegisterPage />
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
+          <CustomModal showRegister={showRegister} handleClose={handleClose}>
+            <RegisterPage />
+          </CustomModal>
           <p>or sign up with:</p>
           {/* Add the onClick event handlers for the social login buttons if needed */}
           <button type="button" className="btn btn-link btn-floating mx-1">
