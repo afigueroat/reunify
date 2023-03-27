@@ -32,12 +32,12 @@ def get_all_events():
         event = {
             'event_id': row[0],
             'event_name': row[1],
-            'event_type_id': row[2],
+            'event_type_id': find_event_type_by_id(row[2]),
             'event_date': row[3].strftime('%Y-%m-%d'),
             'event_time': (datetime.datetime(1, 1, 1) + row[4]).time().strftime('%H:%M:%S'),
             'event_location': row[5],
             'event_description': row[6],
-            'user_id': row[7]
+            'user_name': find_user_by_id(row[7])
         }
         events.append(event)
     print(events)
@@ -80,3 +80,20 @@ def delete_event(event_id):
     cur.close()
     return jsonify({'message': 'Event deleted successfully'}), 200
 
+def find_user_by_id(user_id):
+    cur = current_app.mysql.connection.cursor()
+    cur.execute("SELECT name, lastname from users where user_id = %s", (user_id,))
+    data = cur.fetchall()
+    cur.close()
+    if data:
+        name, lastname = data[0]
+        return f"{name} {lastname}"
+    else:
+        return None
+    
+def find_event_type_by_id(event_type_id):
+    cur = current_app.mysql.connection.cursor()
+    cur.execute("SELECT event_type_name from event_types where event_type_id = %s", (event_type_id,))
+    data = cur.fetchall()
+    cur.close()
+    return data[0]
