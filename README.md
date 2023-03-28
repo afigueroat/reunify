@@ -37,9 +37,7 @@ pip install -r backend\requirements.txt
 
 5. Start the Flask backend server:
 
-cd backend
-set FLASK_APP=app.py
-flask run
+python app.py
 
 ### Frontend Setup
 
