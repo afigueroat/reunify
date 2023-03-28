@@ -23,6 +23,8 @@ Replace `yourusername` with your GitHub username.
 
 2. Create a virtual environment using Python venv:
 
+cd reunify\backend
+
 python -m venv venv
 
 3. Activate the virtual environment:
