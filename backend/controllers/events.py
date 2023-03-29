@@ -40,7 +40,6 @@ def get_all_events():
             'user_name': find_user_by_id(row[7])
         }
         events.append(event)
-    print(events)
     return jsonify(events), 200
 
 
@@ -48,10 +47,48 @@ def get_all_events():
 def get_event(event_id):
     cur = current_app.mysql.connection.cursor()
     cur.execute("SELECT * FROM events WHERE event_id = %s", (event_id,))
-    data = cur.fetchone()
+    data = cur.fetchall()
     cur.close()
-    if data:
-        return jsonify(data), 200
+    events = []
+    for row in data:
+        event = {
+            'event_id': row[0],
+            'event_name': row[1],
+            'event_type_id': find_event_type_by_id(row[2]),
+            'event_date': row[3].strftime('%Y-%m-%d'),
+            'event_time': (datetime.datetime(1, 1, 1) + row[4]).time().strftime('%H:%M:%S'),
+            'event_location': row[5],
+            'event_description': row[6],
+            'user_name': find_user_by_id(row[7])
+        }
+        events.append(event)
+    if events:
+        return jsonify(events), 200
+    else:
+        return jsonify({'message': 'Event not found'}), 404
+    
+@events_bp.route('/events/<string:event_date>', methods=['GET'])
+def get_event_by_date(event_date):
+    cur = current_app.mysql.connection.cursor()
+    cur.execute("SELECT * FROM events WHERE event_date = %s", (event_date,))
+    data = cur.fetchall()
+    cur.close()
+    events = []
+    for row in data:
+        event = {
+            'event_id': row[0],
+            'event_name': row[1],
+            'event_type_id': find_event_type_by_id(row[2]),
+            'event_date': row[3].strftime('%Y-%m-%d'),
+            'event_time': (datetime.datetime(1, 1, 1) + row[4]).time().strftime('%H:%M:%S'),
+            'event_location': row[5],
+            'event_description': row[6],
+            'user_name': find_user_by_id(row[7])
+        }
+        events.append(event)
+    if events:
+        print (events)
+        return jsonify(events), 200
     else:
         return jsonify({'message': 'Event not found'}), 404
 

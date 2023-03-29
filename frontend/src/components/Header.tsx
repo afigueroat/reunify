@@ -15,7 +15,9 @@ const Header = () => {
             <LinkContainer to="/events">
               <Nav.Link>Event</Nav.Link>
             </LinkContainer>
-            {/* Add more Nav.Link components as needed */}
+            <LinkContainer to="/Calendar">
+              <Nav.Link>Calendar</Nav.Link>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Container>
