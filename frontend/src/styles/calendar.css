@@ -1,0 +1,48 @@
+.calendar {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.calendar thead th {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 8px;
+}
+
+.calendar tbody td {
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 8px;
+  vertical-align: top;
+  height: 100px;
+}
+
+.day--weekend {
+  background-color: #f9f9f9;
+}
+
+.day--empty {
+  background-color: #fff;
+  border: 0;
+}
+
+.day-events {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.event {
+  background-color: #17a2b8;
+  color: #fff;
+  padding: 2px 4px;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.event:hover {
+  background-color: #138496;
+  text-decoration: none;
+}
