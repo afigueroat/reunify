@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
-import EventTable from './components/EventTable'
-import CustomModal from './components/Modal'
-import EventForm from './EventForm'
+import EventTable from '../components/EventTable'
+import CustomModal from '../components/Modal'
+import EventForm from '../components/forms/EventForm'
 
 function EventPage() {
   const [showRegister, setShowRegister] = useState(false)
