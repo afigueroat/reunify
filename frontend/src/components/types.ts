@@ -1,7 +1,4 @@
-export interface EventType {
-  id: number;
-  name: string;
-}
+
 
 interface Event {
   event_id: number;
@@ -11,7 +8,7 @@ interface Event {
   event_date: string;
   event_time: string;
   user_name: string;
-  event_type_id: EventType[];
+  event_type_id: string;
 }
 
 export interface CalendarEvent extends Event {}

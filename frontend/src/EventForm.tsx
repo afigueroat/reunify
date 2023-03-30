@@ -1,6 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import axios from 'axios'
+
+interface EventType {
+  event_type_id: number
+  event_type_name: string
+}
 
 const EventForm = () => {
   const [event, setEvent] = useState({
@@ -13,10 +18,23 @@ const EventForm = () => {
     user_id: '',
   })
 
+  const [eventTypes, setEventTypes] = useState<EventType[]>([])
+
+  useEffect(() => {
+    axios
+      .get('/api/event_types')
+      .then((response) => {
+        setEventTypes(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-      await axios.post('/events', event)
+      await axios.post('/api/events', event)
       alert('Event created successfully')
       setEvent({
         event_name: '',
@@ -51,15 +69,26 @@ const EventForm = () => {
       </Form.Group>
 
       <Form.Group controlId="event_type_id">
-        <Form.Label>Event Type ID</Form.Label>
+        <Form.Label>Event Type</Form.Label>
         <Form.Control
-          type="text"
-          placeholder="Enter event type ID"
+          as="select"
           name="event_type_id"
           value={event.event_type_id}
           onChange={handleChange}
           required
-        />
+        >
+          <option value="" disabled>
+            Select event type
+          </option>
+          {eventTypes.map((eventType) => (
+            <option
+              key={eventType.event_type_id}
+              value={eventType.event_type_id}
+            >
+              {eventType.event_type_name}
+            </option>
+          ))}
+        </Form.Control>
       </Form.Group>
 
       <Form.Group controlId="event_date">

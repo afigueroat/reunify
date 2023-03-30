@@ -5,12 +5,14 @@ interface ModalProps {
   showRegister: boolean
   handleClose: () => void
   children?: React.ReactNode
+  title: string
 }
 
 const CustomModal: React.FC<ModalProps> = ({
   showRegister,
   handleClose,
   children,
+  title,
 }) => {
   const [showModal, setShowModal] = useState(showRegister)
 
@@ -26,7 +28,7 @@ const CustomModal: React.FC<ModalProps> = ({
   return (
     <Modal show={showModal} onHide={handleHide}>
       <Modal.Header closeButton>
-        <Modal.Title>Register</Modal.Title>
+        <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>{children}</Modal.Body>
       <Modal.Footer>

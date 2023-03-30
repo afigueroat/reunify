@@ -46,7 +46,6 @@ const RegisterPage: React.FC = () => {
 
   return (
     <div>
-      <h2>Register</h2>
       <form onSubmit={handleRegister}>
         <div className="form-group">
           <label htmlFor="username">Username</label>

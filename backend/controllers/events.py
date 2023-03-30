@@ -42,6 +42,21 @@ def get_all_events():
         events.append(event)
     return jsonify(events), 200
 
+# READ operation
+@events_bp.route('/event_types', methods=['GET'])
+def get_event_types():
+    cur = current_app.mysql.connection.cursor()
+    cur.execute("SELECT * FROM event_types")
+    data = cur.fetchall()
+    cur.close()
+    events = []
+    for row in data:
+        event = {
+            'event_type_id': row[0],
+            'event_type_name': row[1]
+        }
+        events.append(event)
+    return jsonify(events), 200
 
 @events_bp.route('/events/<int:event_id>', methods=['GET'])
 def get_event(event_id):
@@ -133,4 +148,4 @@ def find_event_type_by_id(event_type_id):
     cur.execute("SELECT event_type_name from event_types where event_type_id = %s", (event_type_id,))
     data = cur.fetchall()
     cur.close()
-    return data[0]
+    return data[0][0]

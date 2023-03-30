@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Calendar from './Calendar'
-import { CalendarEvent, EventType } from './types'
+import { CalendarEvent } from './types'
 import { Modal, Button } from 'react-bootstrap'
 
 const CalendarApp: React.FC = () => {
@@ -44,12 +44,7 @@ const CalendarApp: React.FC = () => {
               <p>Date: {selectedEvent.event_date}</p>
               <p>Time: {selectedEvent.event_time}</p>
               <p>User: {selectedEvent.user_name}</p>
-              <p>
-                Event Type:{' '}
-                {selectedEvent.event_type_id
-                  .map((eventType: EventType) => eventType.name)
-                  .join(', ')}
-              </p>
+              <p>Event Type: {selectedEvent.event_type_id}</p>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCloseModal}>
