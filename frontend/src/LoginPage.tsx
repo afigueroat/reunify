@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import RegisterPage from './RegisterPage'
-import { Button } from 'react-bootstrap'
 import axios from 'axios'
 import CustomModal from './components/Modal'
+import { useAuth } from './AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 const LoginPage: React.FC = () => {
+  const { setLoggedIn } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const [showRegister, setShowRegister] = useState(false)
+  const navigate = useNavigate()
 
   const handleClose = () => setShowRegister(false)
   const handleShow = () => setShowRegister(true)
@@ -17,10 +20,9 @@ const LoginPage: React.FC = () => {
     e.preventDefault()
     try {
       const response = await axios.post('/api/login', { email, password })
-      // Save the access token to local storage or cookies
       localStorage.setItem('access_token', response.data.access_token)
-      // Redirect the user to the dashboard or home page
-      window.location.href = '/events'
+      setLoggedIn(true) // Set loggedIn state to true
+      navigate('/events')
     } catch (err) {
       const error =
         err instanceof Error ? err.message : 'An unknown error occurred'
