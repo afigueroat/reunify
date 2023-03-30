@@ -26,7 +26,11 @@ function EventPage() {
         </Col>
       </Row>
       <div className="modal-container">
-        <CustomModal showRegister={showRegister} handleClose={handleClose}>
+        <CustomModal
+          showRegister={showRegister}
+          handleClose={handleClose}
+          title={'Create new Event'}
+        >
           <EventForm />
         </CustomModal>
       </div>

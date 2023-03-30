@@ -96,7 +96,11 @@ const LoginPage: React.FC = () => {
               Register
             </a>
           </p>
-          <CustomModal showRegister={showRegister} handleClose={handleClose}>
+          <CustomModal
+            showRegister={showRegister}
+            handleClose={handleClose}
+            title={'Register'}
+          >
             <RegisterPage />
           </CustomModal>
           <p>or sign up with:</p>
