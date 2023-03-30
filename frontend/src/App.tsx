@@ -1,10 +1,10 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import CalendarApp from './components/CalendarApp'
+import CalendarApp from './pages/CalendarApp'
 import Header from './components/Header'
 import Home from './components/Home'
-import EventPage from './EventPage'
-import { AuthProvider } from './AuthContext'
+import EventPage from './pages/EventPage'
+import { AuthProvider } from './context/AuthContext'
 
 const App: React.FC = () => {
   return (

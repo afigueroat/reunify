@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navbar, Nav, Container, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import { useAuth } from '../AuthContext'
+import { useAuth } from '../context/AuthContext'
 import logo from '../images/logo.png'
 import { useNavigate } from 'react-router-dom'
 
