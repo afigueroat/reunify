@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import RegisterPage from './RegisterPage'
 import axios from 'axios'
-import CustomModal from './components/Modal'
-import { useAuth } from './AuthContext'
+import CustomModal from '../components/Modal'
+import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 
 const LoginPage: React.FC = () => {

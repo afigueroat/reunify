@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import Calendar from './Calendar'
-import { CalendarEvent } from './types'
+import Calendar from '../components/Calendar'
+import { CalendarEvent } from '../components/types'
 import { Modal, Button } from 'react-bootstrap'
 
 const CalendarApp: React.FC = () => {

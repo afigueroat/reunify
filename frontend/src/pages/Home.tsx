@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
-import LoginPage from '../LoginPage'
+import LoginPage from './LoginPage'
 
 const Home: React.FC = () => {
   return (
